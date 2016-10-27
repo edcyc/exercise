@@ -1,6 +1,6 @@
 # exercise
 
-After git clone, use the following command to create a set of EC2 servers as Docker hosts to host Docker containers of Wordpress and MySQL. There is a ELB created and load balance incoming request to Wordpress applications.
+After git clone, use the following command to create a set of EC2 servers as Docker hosts to host Docker containers of Wordpress and MySQL. The security key pair and security group are created in the process, too. There is a ELB created and load balance incoming request to Wordpress applications.
 
 cloud-automation.sh <app> <environment> <num_servers> <server_size>
 
