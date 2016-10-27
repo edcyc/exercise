@@ -17,3 +17,5 @@ server_size decides which EC2 instance type is.
 Notice: the Ubuntu 14.04 image is the quick list doesn't support t1.micro but support t2 series due to the virtualization type hvm. 
 
 Other configurations are in the cloud-automation.sh.
+
+After the script is done, the elb_result.elb.dns_name shown in the last few messages is the dns of the ELB to load balance to Wordpress applications. It is also in the generated file elb_dns.
