@@ -16,7 +16,7 @@ num_servers decides how many EC2 servers are created.
 
 server_size decides which EC2 instance type is. 
 
-Notice: the Ubuntu 14.04 image is the quick list doesn't support t1.micro but support t2 series due to the virtualization type hvm. 
+Notice: the Ubuntu 14.04 image ami-a21529cc in the quick list doesn't support t1.micro but support t2 series due to the virtualization type hvm. 
 
 Other configurations are in the cloud-automation.sh.
 
