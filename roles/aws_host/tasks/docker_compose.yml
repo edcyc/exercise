@@ -1,0 +1,7 @@
+- name: Copy Dockerfile
+  copy: src=roles/aws_host/files/docker-compose.yml dest=./docker-compose.yml
+  become: true
+  
+- name: Run docker compose
+  shell: docker-compose up -d
+  become: true

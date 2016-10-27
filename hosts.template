@@ -1,0 +1,14 @@
+[all:children]
+localhost
+aws_host
+[all:vars]
+key_pair_name=yuchen_chang_keypair
+generated_key_pair_private_key_file_path=./private_key_to_access_aws.pem
+security_group_name=yuchen_chang_security_group
+instance_tag=yuchen_chang_instance
+
+[localhost]
+127.0.0.1 ansible_user=username ansible_ssh_pass=password
+
+[aws_host]
+

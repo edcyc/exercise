@@ -1,0 +1,44 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - include: roles/aws_host/tasks/create_keypair.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - include: roles/aws_host/tasks/create_security_groups.yml
+  
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - include: roles/aws_host/tasks/create_hosts.yml
+  
+- hosts: aws_host
+  vars:
+    ansible_user: "ubuntu"
+    ansible_ssh_private_key_file: "{{ generated_key_pair_private_key_file_path }}"
+  tasks:
+  - include: roles/aws_host/tasks/install_docker.yml
+  
+- hosts: aws_host
+  vars:
+    ansible_user: "ubuntu"
+    ansible_ssh_private_key_file: "{{ generated_key_pair_private_key_file_path }}"
+  tasks:
+  - include: roles/aws_host/tasks/build_docker_image.yml
+
+- hosts: aws_host
+  vars:
+    ansible_user: "ubuntu"
+    ansible_ssh_private_key_file: "{{ generated_key_pair_private_key_file_path }}"
+  tasks:
+  - include: roles/aws_host/tasks/docker_compose.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+  - include: roles/aws_host/tasks/create_elb.yml

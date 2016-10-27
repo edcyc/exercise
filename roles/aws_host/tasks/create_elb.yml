@@ -1,0 +1,47 @@
+- name: Show group aws_host
+  debug: var=ec2.instances
+
+- name: set fact
+  set_fact: list_item="{{ item.id }}"
+  with_items: "{{ ec2.instances }}"
+  register: list_result
+  until: list_result|success
+  retries: 3
+  delay: 5
+
+- name: make a list
+  set_fact: aws_instance_id_list="{{ list_result.results | map(attribute='ansible_facts.list_item') | list }}"
+  register: aws_instance_id_list
+
+- name: Show aws instance id list
+  debug: var=aws_instance_id_list
+
+- name: Create ec2_elb_lb
+  ec2_elb_lb:
+    name: "yuchen-chang-elb"
+    state: present
+    zones:
+      - "{{ lookup('env','AWS_ZONE') }}"
+    instance_ids: "{{ aws_instance_id_list }}"
+    idle_timeout: 600
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+        proxy_protocol: True
+  register: elb_result
+
+- name: Show ELB DNS
+  debug: var=elb_result.elb.dns_name
+
+- name: copy
+  copy: content="{{ elb_result.elb.dns_name }}" dest="./elb_dns"
+
+- name: Wait for ELB to come up 
+  local_action: wait_for 
+    host={{ elb_result.elb.dns_name }} 
+    port=80 
+    state=started
+
+- name: Show ELB DNS
+  debug: var=elb_result.elb.dns_name

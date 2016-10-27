@@ -1,0 +1,15 @@
+- name: delete ec2 key if existing
+  ec2_key:
+    name: "{{ key_pair_name }}_{{ lookup('env','ENVIRONMENT') }}_{{ lookup('env','APP') }}"
+    state: absent
+  register: result
+
+- name: create ec2 key
+  ec2_key:
+    name: "{{ key_pair_name }}_{{ lookup('env','ENVIRONMENT') }}_{{ lookup('env','APP') }}"
+  register: result
+
+- name: copy
+  copy: content="{{ result.key.private_key }}" dest="{{ generated_key_pair_private_key_file_path }}"
+  
+- file: path="{{ generated_key_pair_private_key_file_path }}" state=touch mode="0400"

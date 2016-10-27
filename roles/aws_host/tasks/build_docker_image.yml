@@ -1,0 +1,20 @@
+- name: Creates directory
+  file: path=./wordpress_app state=directory
+  become: true
+
+- name: Copy Dockerfile
+  copy: src=roles/aws_host/files/wordpress_app/Dockerfile dest=./wordpress_app/Dockerfile
+  become: true
+
+# Build image
+# Due to Ansible docker_image version checking bug. This could only be used for old version docker-py <= 1.9.
+#- name: Build image
+#  docker_image:
+#    path: ./wordpress_app
+#    name: wordpress_app
+#    force: yes
+#  become: yes
+
+- name: Build docker image
+  shell: docker build -t wordpress_app ./wordpress_app
+  become: true
