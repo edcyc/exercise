@@ -3,7 +3,7 @@
 #sudo apt-add-repository ppa:ansible/ansible -y
 #sudo apt-get update
 #sudo apt-get install -y --force-yes ansible
-sudo apt-get install -y pip
+sudo apt-get install -y python-pip
 sudo pip install ansible==2.1.2
 
 export AWS_ACCESS_KEY_ID=""
@@ -22,7 +22,6 @@ export SERVER_SIZE=${4:-t2.micro}
 # To avoid the known host list issue
 export ANSIBLE_HOST_KEY_CHECKING=False
 
-sudo apt-get install python-pip
 # For Ansible ec2 module
 sudo pip install boto
 
