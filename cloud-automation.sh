@@ -1,8 +1,10 @@
 # Install Ansible
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible -y
-sudo apt-get update
-sudo apt-get install -y --force-yes ansible
+#sudo apt-get install software-properties-common
+#sudo apt-add-repository ppa:ansible/ansible -y
+#sudo apt-get update
+#sudo apt-get install -y --force-yes ansible
+sudo apt-get install -y pip
+sudo pip install ansible==2.1.2
 
 export AWS_ACCESS_KEY_ID="AKIAIV6UZV76B5HTQVNA"
 export AWS_SECRET_ACCESS_KEY="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"
