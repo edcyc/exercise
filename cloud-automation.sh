@@ -6,8 +6,8 @@
 sudo apt-get install -y pip
 sudo pip install ansible==2.1.2
 
-export AWS_ACCESS_KEY_ID="AKIAIV6UZV76B5HTQVNA"
-export AWS_SECRET_ACCESS_KEY="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"
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
 export AWS_REGION="ap-northeast-1"
 export AWS_ZONE="ap-northeast-1a"
 export AWS_URL="https://ec2.ap-northeast-1.amazonaws.com"
